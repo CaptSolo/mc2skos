@@ -30,9 +30,15 @@ subject_schemes:
     noubomr:
         concept: http://data.ub.uio.no/mrtermer/c{control_number[3:]}
         scheme: http://data.ub.uio.no/mrtermer/
-    nll:
-        concept: http://dati.lnb.lv/skos/{control_number}
-        scheme: http://dati.lnb.lv/skos/
+    nll-sh:
+        concept: http://dati.lnb.lv/onto/subject/{control_number}
+        scheme: http://dati.lnb.lv/onto/subject/
+    nll-geo:
+        concept: http://dati.lnb.lv/onto/geo/{control_number}
+        scheme: http://dati.lnb.lv/onto/geo/
+    nll-genre:
+        concept: http://dati.lnb.lv/onto/genre/{control_number}
+        scheme: http://dati.lnb.lv/onto/genre/
     gnd:
         concept: http://d-nb.info/gnd/{control_number}
         scheme: http://d-nb.info/gnd/
