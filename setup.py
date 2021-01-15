@@ -14,23 +14,22 @@ here = os.path.abspath(os.path.dirname(__file__))
 README = open(os.path.join(here, 'README.rst')).read()
 
 setup(name='mc2skos',
-      version='0.11.1',  # Use bumpversion to update
+      version='0.12.0',  # Use bumpversion to update
       description='Convert Marc21 Classification records in MARC/XML to SKOS/RDF ',
       long_description=README,
       classifiers=[
           'Programming Language :: Python',
           'Programming Language :: Python :: 2.7',
-          'Programming Language :: Python :: 3.4',
-          'Programming Language :: Python :: 3.5',
           'Programming Language :: Python :: 3.6',
           'Programming Language :: Python :: 3.7',
+          'Programming Language :: Python :: 3.8',
       ],
       keywords='marc rdf skos',
       author='Dan Michael O. Heggø',
       author_email='danmichaelo@gmail.com',
       url='https://github.com/scriptotek/mc2skos',
       license='MIT',
-      install_requires=['rdflib',
+      install_requires=['rdflib[sparql]',
                         'rdflib-jsonld',
                         'lxml',
                         'otsrdflib>=0.5.0,<0.6.0',
