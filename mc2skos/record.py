@@ -119,7 +119,12 @@ class Record(object):
             lang = entry.text('mx:subfield[@code="9"]')
 
             if lang is not None:
-                lang = languages.get(part2b=lang).part1
+                try:
+                    lang = languages.get(part2b=lang).part1
+
+                except KeyError as err:
+                    logger.error('Ignoring invalid ISO language code [%s]', lang)
+                    lang = None
 
             term = {
                 'value': label,
