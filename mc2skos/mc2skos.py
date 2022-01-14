@@ -53,7 +53,7 @@ def add_record_to_graph(graph, record, options):
 
     if options.get('nll_lang'):
 
-        #  - no default language (because of labels can be in multiple languages)
+        #  - no default language (because labels can be in multiple languages)
         record.lang = None
         #  - except for prefLabels (which are in Latvian)
         record.prefLang = "lv"
@@ -106,8 +106,15 @@ def add_record_to_graph(graph, record, options):
 
     # Add index terms as skos:altLabel
     if options.get('include_altlabels'):
+
         for label in record.altLabel:
-            graph.add((record_uri, SKOS.altLabel, Literal(label['term'], lang=record.lang)))
+
+            if not options.get('nll_lang'):
+                graph.add((record_uri, SKOS.altLabel, Literal(label['term'], lang=record.lang)))
+
+            else:
+                # use MARC language codes from custom subfield $9
+                graph.add((record_uri, SKOS.altLabel, Literal(label['term'], lang=label['lang'])))
 
     # Add relations (SKOS:broader, SKOS:narrower, SKOS:xxxMatch, etc.)
     for relation in record.relations:

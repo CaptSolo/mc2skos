@@ -114,12 +114,21 @@ class Record(object):
                     cni = cn[0].lstrip('(')
                 else:
                     cn = cn[0]
+
+            # Custom subfield $9 used for language code (in National Library of Latvia)
+            lang = entry.text('mx:subfield[@code="9"]')
+
+            if lang is not None:
+                lang = languages.get(part2b=lang).part1
+
             term = {
                 'value': label,
                 'node': entry,
                 'control_number': cn,
                 'control_number_identifier': cni,
+                'lang': lang,
             }
+
             if 'isCaption' in entry.get_ess_codes():
                 terms.insert(0, term)
             else:
@@ -392,7 +401,8 @@ class ClassificationRecord(Record):
         # 7XX Index terms
         for heading in self.get_terms('7'):
             self.altLabel.append({
-                'term': heading['value']
+                'term': heading['value'],
+                'lang': heading['lang'],
             })
 
         # 7XX: Heading Linking Entries
@@ -675,7 +685,8 @@ class AuthorityRecord(Record):
         # 4XX: See From Tracings
         for heading in self.get_terms('4'):
             self.altLabel.append({
-                'term': heading['value']
+                'term': heading['value'],
+                'lang': heading['lang'],
             })
 
         # 5XX: See Also From Tracings
