@@ -115,7 +115,7 @@ class Record(object):
                 else:
                     cn = cn[0]
 
-            # Custom subfield $9 used for language code (in National Library of Latvia)
+            # Custom subfield $9 used for language code (e.g. by National Library of Latvia)
             lang = entry.text('mx:subfield[@code="9"]')
 
             if lang is not None:
