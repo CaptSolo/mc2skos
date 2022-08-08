@@ -69,6 +69,7 @@ def add_record_to_graph(graph, record, options):
     record_uri = URIRef(record.uri)
 
     graph.add((record_uri, RDF.type, SKOS.Concept))
+    logger.debug(f'Record URI: {record_uri}')
 
     # Add skos:topConceptOf or skos:inScheme
     for scheme_uri in record.scheme_uris:
