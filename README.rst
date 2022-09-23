@@ -55,7 +55,7 @@ To directly use a version from source code repository:
 
 .. code:: console
 
-    $ git clone https://github.com/scriptotek/mc2skos.git
+    $ git clone https://github.com/CaptSolo/mc2skos.git
     $ cd mc2skos
     $ pip install -e .
 
