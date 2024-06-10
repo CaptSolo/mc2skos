@@ -123,7 +123,7 @@ class Record(object):
                     lang = languages.get(part2b=lang).part1
 
                 except KeyError as err:
-                    logger.error('Ignoring invalid ISO language code [%s]', lang)
+                    logger.error('Ignoring invalid ISO language code [%s]: %s', lang, self.control_number)
                     lang = None
 
             term = {
@@ -145,6 +145,8 @@ class Record(object):
 
         # 001
         self.control_number = self.record.text('mx:controlfield[@tag="001"]')
+
+        logger.info("%s", self.control_number)
 
         # 010 : If present, it takes precedence over 001.
         # <https://github.com/scriptotek/mc2skos/issues/42>
@@ -186,8 +188,8 @@ class Record(object):
             logger.warning((
                 'Found links to "%s"%s, but mc2skos doesn\'t know the URI pattern of'
                 ' that vocabulary, so no SKOS mappings were generated. See'
-                ' <https://github.com/scriptotek/mc2skos#uris> for more info.'
-            ) % (scheme_code, tag))
+                ' <https://github.com/scriptotek/mc2skos#uris> for more info. - %s'
+            ) % (scheme_code, tag, self.control_number))
             return
 
         if uri:
@@ -282,6 +284,8 @@ class ClassificationRecord(Record):
     def parse(self, options):
 
         super(ClassificationRecord, self).parse(options)
+
+        logger.info("%s", self.control_number)
 
         # 008
         value = self.record.text('mx:controlfield[@tag="008"]')
@@ -635,6 +639,8 @@ class AuthorityRecord(Record):
 
     def parse(self, options):
         super(AuthorityRecord, self).parse(options)
+
+        logger.info("%s", self.control_number)
 
         # Now we have enough information to generate URIs
         self.generate_uris()
